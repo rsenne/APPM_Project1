@@ -32,7 +32,7 @@ legend('Error: h= 0.5', 'Error: h= 0.1', 'Error: h = 0.01')
 %%
 f2 = @logisticHarvesting;
 
-% % %x = fzero(f2, 1);
+x = fzero(f, 1);
 
 pop84 = eulersMethod(f2, 0.1, 0, 30, 84);
 pop24 = eulersMethod(f2, 0.1, 0, 30, 24);
@@ -40,11 +40,10 @@ pop18 =eulersMethod(f2, 0.1, 0, 30, 18);
 pop6 = eulersMethod(f2, 0.1, 0, 30, 6);
 
 figure
-hold on
+dirfield(f2, linspace(0, 30, 3001), linspace(0,100,3001), 'hi')
 plot(pop84(1, :), pop84(2, :), pop24(1, :), pop24(2, :), ':', pop18(1, :), ...
     pop18(2, :), '--', pop6(1, :), pop6(2, :), '-.')
 xlabel('Time (years)')
 ylabel('Population')
 legend('Euler: h= 0.5', 'Euler: h= 0.1', 'Euler: h = 0.01', ...
     'Actual Solution')
-dirfield(f2, 0:1:30, 0:0.5:10, 'hi')
