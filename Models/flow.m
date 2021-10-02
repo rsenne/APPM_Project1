@@ -1,4 +1,4 @@
-close all; clear all; 
+% close all; clear all; 
 % This Matlab code generates a vector field for the system of ODEs 
 % dx1/dt = f(x1,x2), dx2/dt = g(x1,x2)
 
@@ -15,24 +15,33 @@ close all; clear all;
 
 % Step 1: Set the axis limits so that you plot the vector field over the
 %         intervals x1min < x1 < x1max, x2min < x2 < x2max
-    x1min = -5; x1max = 5; x2min = -5; x2max = 5;
+    x1min = -1; x1max = 6; x2min = -1; x2max = 6;
 
 % Step 2: pick step sizes for x1 and x2;
-    x1step = 1; x2step = 1; 
+    x1step = 0.1; x2step = 0.1; 
 
 % generate mesh for plotting
     [x1, x2] = meshgrid(x1min:x1step:x1max, x2min:x2step:x2max);
 
 % Step 3: define all needed parameter values 
-    a = 1; 
+    a = 1.5;
+    b=1.1;
+    y=2.5;
+    d=1.4;
+    k=0.4;
 
 % Step 4: define the system of equations you are using
-    dx1 = a*x2;  
-    dx2 =  -x1; 
+%     dx1 = (-a.*x1)+(b.*x1.*x2);  
+%     dx2 = (y.*x2)-(d.*x1.*x2); 
+
+    dx1 = (-a.*x1)+(b.*x1.*x2);
+    dx2 = y.*(1-k.*x2).*x2-(d.*x1.*x2);
+
 
 % normalize vectors (to help plotting)
-    dx1 = dx1./sqrt(dx1.^2 + dx2.^2); 
     dx2 = dx2./sqrt(dx1.^2 + dx2.^2); 
+    dx1 = dx1./sqrt(dx1.^2 + dx2.^2); 
+    
 
 % generate the vector field
     quiver(x1, x2, dx1,dx2,'AutoScaleFactor',0.5)

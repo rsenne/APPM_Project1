@@ -1,4 +1,4 @@
 function dpdt = logisticHarvesting(p)
-    dpdt = logisticPop(p) - harvesting(p);
+    dpdt = logisticPop2(p) - harvesting(p);
 end
  
