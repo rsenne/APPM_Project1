@@ -4,6 +4,7 @@ f = @logisticPop;
 popLow = eulersMethod(f, 0.5, 0, 30, 6);
 popMed = eulersMethod(f, 0.1, 0, 30, 6);
 popHigh = eulersMethod(f, 0.01, 0, 30, 6);
+
 actual_population = arrayfun(@ivp, linspace(0,30,61));
 errorpopLow = absoluteError(popLow(2, :), actual_population);
 errorpopMed = absoluteError(popMed(2, :), arrayfun(@ivp, ...
@@ -33,7 +34,9 @@ legend('Error: h= 0.5', 'Error: h= 0.1', 'Error: h = 0.01')
 %%
 f2 = @logisticHarvesting;
 
-x = fzero(f2, 0.1);
+z0 = fzero(f2, 0.8);
+z1 = fzero(f2, 1.85);
+z2 = fzero(f2, 5.44);
 
 pop84 = eulersMethod(f2, 0.1, 0, 30, 84);
 pop24 = eulersMethod(f2, 0.1, 0, 30, 24);
@@ -44,11 +47,15 @@ figure
 hold on
 plot(pop84(1, :), pop84(2, :), pop24(1, :), pop24(2, :), ':', pop18(1, :), ...
     pop18(2, :), '--', pop6(1, :), pop6(2, :), '-.')
+dirfield(f2, 0:1:30, 0:0.5:10, 'Mule Deer Population')
+yline(z0)
+yline(z1)
+yline(z2)
 xlabel('Time (years)')
 ylabel('Population')
 legend('Euler: h= 0.5', 'Euler: h= 0.1', 'Euler: h = 0.01', ...
     'Actual Solution')
-dirfield(f2, 0:1:30, 0:0.5:10, 'hi')
+
 
 %%
 h = @harvesting;
@@ -65,9 +72,14 @@ axis([-0.005 0.12 1.195 1.201])
 %%
 figure
 hold on
+equX = [0, 0, (2.5/1.4), (2.5/1.4)];
+equY = [0, (1.5/1.1), 0, (1.5/1.1)];
+scatter(equX, equY,'g', 'filled')
 flow
-xline([0 , 1.5/1.1], 'red')
-yline([0, 2.5/1.4], 'black')
+xline(0, 'red')
+yline((1.5/1.1), 'red')
+yline(0, 'black')
+xline((2.5/1.4), 'black')
 
 f3 = @lotkaVolterra;
 [t, P] = ode45(f3, [0,30], [0.5, 1]);
@@ -88,13 +100,20 @@ f4 = @lotkavolterraLogistic;
 [t1, P1] = ode45(f4, [0,30], [5,1]);
 [t2, P2] = ode45(f4, [0,30], [1,5]);
 
+figure
 flow
-hold on 
-plot(P1(:,1), P1(:,2), P2(:,1), P2(:,2))
+hold on
+xline(0, 'black')
+yline(0,'red')
+yline((1.5/1.1), 'black');
+f5 = @(x2) ((2.5-(2.5*0.5*x2))/1.4);
+hnull = arrayfun(f5, linspace(-1, 6, 100));
+plot(P1(:,1), P1(:,2), P2(:,1), P2(:,2), linspace(-1, 6, 100), hnull, 'red');
+
 
 
 figure
-plot(t1, P1(:,1), t1, P1(:,2))
+plot(t1, P1(:,1), t1, P1(:,2));
 xlabel('Time (years)')
 ylabel('Population')
 legend("Population 1", "Population 2")
