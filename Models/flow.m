@@ -33,12 +33,9 @@
 % Step 4: define the system of equations you are using
 %     dx1 = (-a.*x1)+(b.*x1.*x2);  
 %     dx2 = (y.*x2)-(d.*x1.*x2); 
-
-%     dx1 = (-a.*x1)+(b.*x1.*x2);
-%     dx2 = y.*(1-k.*x2).*x2-(d.*x1.*x2);
-
+% 
     dx1 = (-a.*x1)+(b.*x1.*x2);
-    dx2 = (y*(1-k*x1).*x2)-(d*x1.*x2);
+    dx2 = y.*(1-k.*x2).*x2-(d.*x1.*x2);
 
 % normalize vectors (to help plotting)
     dx2 = dx2./sqrt(dx1.^2 + dx2.^2); 
