@@ -68,8 +68,8 @@ yline(z1)
 yline(z2)
 xlabel('Time (years)')
 ylabel('Population')
-legend('Euler: h= 0.5', 'Euler: h= 0.1', 'Euler: h = 0.01', ...
-    'Actual Solution')
+legend('Euler: P(0)=84', 'Euler: P(0)=24', 'Euler: P(0)=18', ...
+    'Euler: P(0)=6')
 
 
 %%
@@ -135,14 +135,14 @@ f4 = @lotkavolterraLogistic;
 figure
 flow
 hold on
-xline(0, 'black')
-yline(0,'red')
-yline((1.5/1.1), 'black');
+xline(0, 'red')
+yline(0,'black')
+yline((1.5/1.1), 'red');
 legend('Slope Field', 'h-nullcline', 'v-nullcline')
 % anonymous function for one of the clines
 f5 = @(x2) ((2.5-(2.5*0.5*x2))/1.4);
 hnull = arrayfun(f5, linspace(-1, 6, 100));
-plot(P1(:,1), P1(:,2), P2(:,1), P2(:,2), linspace(-1, 6, 100), hnull, 'red');
+plot(P1(:,1), P1(:,2), P2(:,1), P2(:,2), linspace(-1, 6, 100), hnull, 'black');
 
 
 % plot components in time
