@@ -139,6 +139,10 @@ xline(0, 'red')
 yline(0,'black')
 yline((1.5/1.1), 'red');
 legend('Slope Field', 'h-nullcline', 'v-nullcline')
+equY2 = [(1.5/1.1)];
+equX2 = [(2.5-(2.5*0.5*(1.5/1.1)))/1.4];
+scatter(equX2, equY2,'g', 'filled')
+scatter(0,0, 'g')
 % anonymous function for one of the clines
 f5 = @(x2) ((2.5-(2.5*0.5*x2))/1.4);
 hnull = arrayfun(f5, linspace(-1, 6, 100));
