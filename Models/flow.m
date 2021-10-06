@@ -18,7 +18,7 @@
     x1min = -1; x1max = 6; x2min = -1; x2max = 6;
 
 % Step 2: pick step sizes for x1 and x2;
-    x1step = 0.25; x2step = 0.25; 
+    x1step = 0.1; x2step = 0.1; 
 
 % generate mesh for plotting
     [x1, x2] = meshgrid(x1min:x1step:x1max, x2min:x2step:x2max);
